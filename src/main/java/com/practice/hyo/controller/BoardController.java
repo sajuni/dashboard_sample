@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,12 +67,32 @@ public class BoardController {
 	}
 	
 	@GetMapping(value = "modify")
-	public void modifyGET() {
-		
+	public void modifyGET(@RequestParam("bno") Long bno) {
+		System.out.println("오자나 : " + bno);
 		log.info("board Modify GET....");
 		
 	}
 	
+	@PostMapping(value ="modify")
+	public String modifyPOST(@RequestBody BoardVO board,RedirectAttributes rttr) throws Exception {
+		log.info("board Modify POST...." + board);
+		
+		bService.update(board);
+		
+		return "redirect:/board/list";
+	}
 	
+	@PostMapping(value = "remove")
+	public String removePOST(@RequestParam("bno") Long bno, RedirectAttributes rttr) throws Exception {
+		
+		log.info("board Remove POST.... ");
+		
+		bService.delete(bno);
+		
+		rttr.addFlashAttribute("msg","SUCCESS");
+		
+		return "redirect:/board/list";
+		
+	}
 	
 }

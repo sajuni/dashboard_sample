@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -11,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Tables</title>
+  <title>게시판 - 리스트</title>
 
   <!-- Custom fonts for this template -->
   <link href="../../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -22,7 +21,24 @@
 
   <!-- Custom styles for this page -->
   <link href="../../resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap core JavaScript-->
+  <script src="../../resources/vendor/jquery/jquery.min.js"></script>
+  <script src="../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Core plugin JavaScript-->
+  <script src="../../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="../../resources/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="../../resources/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="../../resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="../../resources/js/demo/datatables-demo.js"></script>
+  
 </head>
 
 <body id="page-top">
@@ -52,7 +68,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered"  width="100%" cellspacing="0">
+                <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th>글번호</th>
@@ -132,23 +148,11 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="../../resources/vendor/jquery/jquery.min.js"></script>
-  <script src="../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="../../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="../../resources/js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="../../resources/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="../../resources/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="../../resources/js/demo/datatables-demo.js"></script>
-
+	<script>
+		document.addEventListener("DOMContentLoaded",() => {
+				console.log()
+			})
+	</script>
 
 </body>
 

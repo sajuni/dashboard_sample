@@ -89,6 +89,7 @@
 					function remove() {
 
 						formObj.setAttribute('action','/board/remove');
+						console.log(formObj.bno.value);
 						formObj.submit();
 						
 					}
