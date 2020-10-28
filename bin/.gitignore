@@ -1,0 +1,26 @@
+
+### STS ###
+.classpath
+.project
+.settings
+.springBeans
+.sts4-cache
+.apt_generated
+.factorypath
+.metadata
+bin/
+*.tmp
+*.bak
+*.swp
+local.properties
+.settings/
+.loadpath
+.target
+.springBeans
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
