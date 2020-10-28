@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,14 +53,21 @@ public class BoardController {
 	
 	}
 	
-	@RequestMapping(value = {"read", "modify"}, method = RequestMethod.GET)
+	@RequestMapping(value = "read", method = RequestMethod.GET)
 	public void boardInfoGET(@RequestParam("bno") Long bno, Model model, RedirectAttributes rttr) throws Exception {
 		
-		log.info("board Modify or GET......");
+		log.info("board Read GET......");
 		
 		BoardVO bInfo = bService.read(bno);
 		
 		model.addAttribute("board", bInfo);
+		
+	}
+	
+	@GetMapping(value = "modify")
+	public void modifyGET() {
+		
+		log.info("board Modify GET....");
 		
 	}
 	

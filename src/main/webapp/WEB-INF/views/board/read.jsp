@@ -50,7 +50,7 @@
 			<div id="content">
 				<c:import url="/WEB-INF/views/include/topbar.jsp" />
 				
-				<form role="form" method="post">
+				<form method="post" name="form">
 					<input type="hidden" name="bno" value="${board.bno}">
 				</form>
 				
@@ -58,39 +58,46 @@
 				<div class="box-body">
 				
 					<div class="form-group">
-						<label for="exampleInputEamil">게시글 제목</label><input type="text" name="title" class="form-control" value="${board}" readonly="readonly">
+						<label for="exampleInputEamil">게시글 제목</label><input type="text" id="title" name="title" class="form-control" value="${board.title}" readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="content" rows="3" readonly="readonly" value="${board.content}"></textarea>
+						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="content" rows="3" readonly="readonly">${board.content}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">작성자</label><input type="text" name="title" class="form-control" value="${board.writer}" readonly="readonly">
+						<label for="exampleInputEmail1">작성자</label><input type="text" id="writer" name="writer" class="form-control" value="${board.writer}" readonly="readonly">
 					</div>
 				</div>
-			<%-- 	<form>
-					<table class="table table-bordered"  width="100%" cellspacing="0">
-						<thead>
-						<tr>
-	                    	<th>글번호</th>
-                        	<th>글제목</th>
-                      		<th>글내용</th>
-                      		<th>작성자</th>
-                      		<th>작성일자</th>
-                      		<th>조회수</th>	
-                    	</tr>
-						</thead>	
-						<tbody>
-							<tr class="board-list">
-								<td><c:out value="${board.bno}"/></td>
-								<td><c:out value="${board.title }"/></td>
-								<td><c:out value="${board.content}"/></td>
-								<td><c:out value="${board.writer}"/></td>
-								<td><fmt:formatDate value="${board.regdate}"/></td>
-								<td><c:out value="${board.viewcnt}"/></td>
-							</tr>
-						</tbody>				
-					</table>
-				</form> --%>
+				
+				<div class="box-footer text-center" style="width: 100%">
+					<button type="submit" class="btn btn-warning" onclick="modify()">Modify</button>
+					<button type="submit" class="btn btn-danger" onclick="remove()">REMOVE</button>
+					<button type="submit" class="btn btn-primary" onclick="listAll()">LIST ALL</button>
+				</div>
+				
+				<script>
+					var formObj = document.form;
+					var title = document.getElementById('title').value;
+					var writer = document.getElementById('writer').value;
+					function modify() {
+						console.log(formObj);
+						formObj.setAttribute('action', '/board/modify');
+						formObj.setAttribute('method', 'get');					
+						formObj.submit();
+						
+					}
+
+					function remove() {
+
+						formObj.setAttribute('action','/board/remove');
+						formObj.submit();
+						
+					}
+
+					function listAll() {
+						self.location = "/board/list";
+					}
+				</script>
+				
 			</div>
 		</div>
 	</div>
