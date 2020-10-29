@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>게시판 - 리스트</title>
+  <title>게시판 - 수정</title>
 
   <!-- Custom fonts for this template -->
   <link href="../../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -61,21 +61,52 @@
 				<div class="box-body">
 				
 					<div class="form-group">
-						<label for="exampleInputEamil">게시글 제목</label><input type="text" id="title" name="title" class="form-control" value="${board.title}" readonly="readonly">
+						<label for="exampleInputEamil">게시글 제목</label><input type="text" id="btitle" name="title" class="form-control" value="${board.btitle}">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="content" rows="3" readonly="readonly">${board.content}</textarea>
+						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="content" rows="3" id="bcontent">${board.bcontent}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">작성자</label><input type="text" id="writer" name="writer" class="form-control" value="${board.writer}" readonly="readonly">
+						<label for="exampleInputEmail1">작성자</label><input type="text" id="bwriter" name="writer" class="form-control" value="${board.bwriter}" readonly="readonly">
 					</div>
 				</div>
 				
 				<div class="box-footer text-center" style="width: 100%">
-					<button type="submit" class="btn btn-warning" onclick="modify()">Modify</button>
-					<button type="submit" class="btn btn-danger" onclick="remove()">REMOVE</button>
-					<button type="submit" class="btn btn-primary" onclick="listAll()">LIST ALL</button>
+					<button type="submit" class="btn btn-warning" onclick="save()">SAVE</button>
+					<button type="submit" class="btn btn-primary" onclick="cancel()">CANCEL</button>
 				</div>
+				
+				<script>
+					var formObj = document.form;
+
+					function save() {
+						
+						var title = document.getElementById('btitle').value;
+						var content = document.getElementById('bcontent').value;
+
+						let inputTitle = document.createElement('input');
+						let inputContent = document.createElement('input');
+
+						inputTitle.setAttribute("type","hidden");
+						inputTitle.setAttribute("name", "btitle");
+						inputTitle.setAttribute("value", title);
+						inputContent.setAttribute("type","hidden");
+						inputContent.setAttribute("name", "bcontent");
+						inputContent.setAttribute("value", content);
+						
+						formObj.appendChild(inputTitle);
+						formObj.appendChild(inputContent);			
+						formObj.setAttribute('action', '/board/modify');
+						formObj.setAttribute('method', 'post');
+						formObj.submit();
+						
+					}
+
+					function cancel() {
+						self.location = "/board/read?bno="+formObj.bno.value;						
+					}
+				</script>
+				
 				
 			</div>
 		</div>

@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Tables</title>
+  <title>게시판 - 등록</title>
 
   <!-- Custom fonts for this template -->
   <link href="../../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,13 +41,20 @@
 			<c:import url="/WEB-INF/views/include/topbar.jsp" />
     		<form action="register" method="post">
     	
-    			<input type="text" name="title" class="form-control mt-4 mb-2" placeholder="제목을 입력해주세요.">		
+    			<input type="text" name="btitle" class="form-control mt-4 mb-2" placeholder="제목을 입력해주세요.">		
 	    		<div class="form-group">
-	    			<textarea class="form-control" rows="10" name="content" placeholder="내용을 입력해주세요."></textarea>
+	    			<textarea class="form-control" rows="10" name="bcontent" placeholder="내용을 입력해주세요."></textarea>
 	    		</div>
 	    		<div class="text-center">
     				<button type="submit" class="btn btn-secondary mb-3">제출하기</button>
-					<button type="button" class="btn btn-secondary mb-3" onclick="alert('반가워요!')">버튼을 클릭</button>  			
+					<button type="button" class="btn btn-secondary mb-3" onclick="cancel()">취소하기</button>  			
+					
+					<script>
+						function cancel() {
+							self.location = '/board/list';
+						}
+					</script>
+					
 				</div>
     		</form>
  		</div>

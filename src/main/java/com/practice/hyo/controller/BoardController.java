@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.practice.hyo.common.PageMaker;
+import com.practice.hyo.common.PagingVO;
 import com.practice.hyo.domain.BoardVO;
 import com.practice.hyo.service.BoardService;
 
@@ -45,7 +47,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public String registerPOST(BoardVO vo) throws Exception {
+	public String registerPOST(@ModelAttribute BoardVO vo) throws Exception {
 		
 		log.info("board Register POST ....... " + vo);
 		
@@ -56,7 +58,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "read", method = RequestMethod.GET)
-	public void boardInfoGET(@RequestParam("bno") Long bno, Model model, RedirectAttributes rttr) throws Exception {
+	public void boardInfoGET(@RequestParam("bno") Long bno, Model model) throws Exception {
 		
 		log.info("board Read GET......");
 		
@@ -67,19 +69,25 @@ public class BoardController {
 	}
 	
 	@GetMapping(value = "modify")
-	public void modifyGET(@RequestParam("bno") Long bno) {
-		System.out.println("오자나 : " + bno);
+	public void modifyGET(@RequestParam("bno") Long bno, Model model) throws Exception {
+		
 		log.info("board Modify GET....");
+		
+		model.addAttribute("board", bService.read(bno));
 		
 	}
 	
 	@PostMapping(value ="modify")
-	public String modifyPOST(@RequestBody BoardVO board,RedirectAttributes rttr) throws Exception {
+	public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+		
 		log.info("board Modify POST...." + board);
 		
 		bService.update(board);
 		
+		rttr.addFlashAttribute("msg", "게시글 수정 성공!!");
+		
 		return "redirect:/board/list";
+		
 	}
 	
 	@PostMapping(value = "remove")
@@ -89,10 +97,24 @@ public class BoardController {
 		
 		bService.delete(bno);
 		
-		rttr.addFlashAttribute("msg","SUCCESS");
+		rttr.addFlashAttribute("msg", "게시글 삭제 성공!!");
 		
 		return "redirect:/board/list";
 		
+	}
+	
+	@GetMapping(value = "listPage")
+	public void listAll(@ModelAttribute PagingVO page, Model model) throws Exception {
+		log.info("show list page with Paging........" + page.toString());
+		
+		model.addAttribute("blist", bService.listPage(page));
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setPage(page);
+//		pageMaker.setTotalCount(131);
+		
+		pageMaker.setTotalCount(bService.countPaging(page));
+		
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 }

@@ -5,9 +5,9 @@ import java.util.Date;
 public class BoardVO {
 
 	private Long bno;
-	private String title;
-	private String content;
-	private String writer;
+	private String btitle;
+	private String bcontent;
+	private String bwriter;
 	private Date regdate;
 	private int viewcnt;
 	public Long getBno() {
@@ -16,23 +16,23 @@ public class BoardVO {
 	public void setBno(Long bno) {
 		this.bno = bno;
 	}
-	public String getTitle() {
-		return title;
+	public String getbtitle() {
+		return btitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setbtitle(String btitle) {
+		this.btitle = btitle;
 	}
-	public String getContent() {
-		return content;
+	public String getbcontent() {
+		return bcontent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setbcontent(String bcontent) {
+		this.bcontent = bcontent;
 	}
-	public String getWriter() {
-		return writer;
+	public String getbwriter() {
+		return bwriter;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setbwriter(String bwriter) {
+		this.bwriter = bwriter;
 	}
 	public Date getRegdate() {
 		return regdate;
@@ -49,7 +49,7 @@ public class BoardVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
+		return "BoardVO [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bwriter=" + bwriter + ", regdate="
 				+ regdate + ", viewcnt=" + viewcnt + "]";
 	}
 	

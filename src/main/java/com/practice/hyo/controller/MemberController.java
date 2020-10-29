@@ -21,9 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController{
 
 	@Autowired
-	private BoardService bService;
-	
-	@Autowired
 	private MemberService mService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

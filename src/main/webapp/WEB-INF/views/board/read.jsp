@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Tables</title>
+  <title>게시판 - 상세보기</title>
 
   <!-- Custom fonts for this template -->
   <link href="../../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -58,28 +58,27 @@
 				<div class="box-body">
 				
 					<div class="form-group">
-						<label for="exampleInputEamil">게시글 제목</label><input type="text" id="title" name="title" class="form-control" value="${board.title}" readonly="readonly">
+						<label for="exampleInputEamil">게시글 제목</label><input type="text" name="btitle" class="form-control" value="${board.btitle}" readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="content" rows="3" readonly="readonly">${board.content}</textarea>
+						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="bcontent" rows="3" readonly="readonly">${board.bcontent}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">작성자</label><input type="text" id="writer" name="writer" class="form-control" value="${board.writer}" readonly="readonly">
+						<label for="exampleInputEmail1">작성자</label><input type="text" name="bwriter" class="form-control" value="${board.bwriter}" readonly="readonly">
 					</div>
 				</div>
 				
 				<div class="box-footer text-center" style="width: 100%">
-					<button type="submit" class="btn btn-warning" onclick="modify()">Modify</button>
+					<button type="submit" class="btn btn-warning" onclick="modify()">MODIFY</button>
 					<button type="submit" class="btn btn-danger" onclick="remove()">REMOVE</button>
 					<button type="submit" class="btn btn-primary" onclick="listAll()">LIST ALL</button>
 				</div>
 				
 				<script>
 					var formObj = document.form;
-					var title = document.getElementById('title').value;
-					var writer = document.getElementById('writer').value;
+
 					function modify() {
-						console.log(formObj);
+						
 						formObj.setAttribute('action', '/board/modify');
 						formObj.setAttribute('method', 'get');					
 						formObj.submit();
@@ -89,7 +88,6 @@
 					function remove() {
 
 						formObj.setAttribute('action','/board/remove');
-						console.log(formObj.bno.value);
 						formObj.submit();
 						
 					}

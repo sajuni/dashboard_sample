@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.practice.hyo.common.PagingVO;
 import com.practice.hyo.domain.BoardVO;
 import com.practice.hyo.repository.BoardDAO;
 
@@ -37,6 +38,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> listAll() throws Exception {
 		return dao.listAll();
+	}
+
+	@Override
+	public List<BoardVO> listPage(PagingVO page) throws Exception {
+		return dao.listPage(page);
+	}
+
+	@Override
+	public int countPaging(PagingVO page) throws Exception {
+		return dao.countPaging(page);
 	}
 
 

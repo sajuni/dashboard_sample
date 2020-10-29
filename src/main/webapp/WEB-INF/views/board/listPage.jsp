@@ -15,7 +15,7 @@
   <!-- Custom fonts for this template -->
   <link href="../../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
+ <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
   <!-- Custom styles for this template -->
   <link href="../../resources/css/sb-admin-2.min.css" rel="stylesheet">
 
@@ -94,6 +94,36 @@
                 </table>
               </div>
             </div>
+          	<nav aria-label="..." style="align-self: center;">
+          		<ul class="pagination" >
+          			<c:if test="${pageMaker.prev}">
+          				<li class="page-item"><a class="page-link" href="listPage?page=${pageMaker.startPage - 1}">&laquo;</a></li>
+          			</c:if>
+          			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="idx">
+          				<li class="page-item<c:out value="${pageMaker.page.page == idx?' active':''}" />">
+          					<a class="page-link" href="listPage?page=${idx}">${idx}</a>
+          				</li>
+          			</c:forEach>
+          			
+          			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+          				<li class="page-item"><a class="page-link" href="listPage?page=${pageMaker.endPage + 1}">&raquo;</a></li>
+          			</c:if>
+          		</ul>
+          	</nav>
+          	
+          	<c:forEach items="${blist}" var="boardVO">
+          		<tr>
+          			<td>${boardVO.bno}</td>
+          			<td>
+          				<a href="/board/readPage${pageMaker.makeQuery(pageMaker.page.page)}&bno=${boardVO.bno}">${boardVO.btitle}</a>
+          			</td>
+          			<td>${boardVO.bwriter}</td>
+          			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate}"/></td>
+          			<td><span class="badge bg-red">${boardVO.viewcnt}</span></td>
+          		</tr>
+          		
+          	</c:forEach>
+          	
           </div>
 			<button type="button" class="btn btn-secondary mb-3" onclick="registerBoard();">글쓰기</button>
 				<script>

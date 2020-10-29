@@ -1,7 +1,5 @@
 package com.practice.hyo.service;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,9 +15,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDAO;
 	
-	@Autowired
-	private HttpSession session;
-	
 	@Override
 	public void regist(MemberVO mem) {
 		mDAO.regist(mem);
@@ -30,7 +25,6 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO mem = new MemberVO();
 		mem.setUserid(userid);
 		mem.setUserpw(userpw);
-		
 		
 		return mDAO.login(mem, rttr);
 	}
