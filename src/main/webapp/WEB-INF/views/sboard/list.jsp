@@ -64,7 +64,15 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+	              <select name="searchType">
+	              	<option value = "n" <c:out value="${cri.searchType == null?'selected':''}" />>검색</option>
+	              	<option value = "t" <c:out value="${cri.searchType eq 't'?'selected':''}" />>글제목</option>
+	              	<option value = "c" <c:out value="${cri.searchType eq 'c'?'selected':''}" />>글내용</option> 
+	              	<option value = "w" <c:out value="${cri.searchType eq 'w'?'selected':''}" />>작성자</option>
+	              </select>
+         		  <input type="text" name='keyword' id="keywordInput" value='${cri.keyword}'>
+         		  <button id="searchBtn" type="button" class="btn btn-secondary mb-3" style="margin-bottom: 0 !important;">Search</button>
+         		  <button id="newBtn" type="button" class="btn btn-secondary mb-3" style="margin-bottom: 0 !important;">New Board</button>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -98,19 +106,20 @@
                 </table>
               </div>
             </div>
+           
           	<nav aria-label="..." style="align-self: center;">
           		<ul class="pagination" >
           			
           			<c:if test="${pageMaker.prev}">
-          				<li class="page-item"><a class="page-link" href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
+          				<li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
           			</c:if>
           			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="idx">
           				<li class="page-item<c:out value="${pageMaker.cri.page == idx?' active':''}" />">
-          					<a class="page-link" href="listPage${pageMaker.makeQuery(idx) }">${idx}</a>
+          					<a class="page-link" href="list${pageMaker.makeSearch(idx) }">${idx}</a>
           				</li>
           			</c:forEach>
           			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-          				<li class="page-item"><a class="page-link" href="listPage${pageMaker.makeQuery(pageMaker.endPage + 1) }">&raquo;</a></li>
+          				<li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.endPage + 1) }">&raquo;</a></li>
           			</c:if>
           			
           		</ul>

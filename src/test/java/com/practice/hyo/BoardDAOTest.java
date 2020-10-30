@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.practice.hyo.common.PagingVO;
+import com.practice.hyo.common.Criteria;
 import com.practice.hyo.domain.BoardVO;
 import com.practice.hyo.repository.BoardDAO;
 

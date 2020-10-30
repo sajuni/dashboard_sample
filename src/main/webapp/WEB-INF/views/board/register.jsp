@@ -51,7 +51,7 @@
 					
 					<script>
 						function cancel() {
-							self.location = '/board/list';
+							self.location = '/board/listPage';
 						}
 					</script>
 					

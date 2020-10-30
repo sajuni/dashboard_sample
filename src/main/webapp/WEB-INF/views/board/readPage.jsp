@@ -1,6 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -10,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>게시판 - 수정</title>
+  <title>게시판 - 상세보기</title>
 
   <!-- Custom fonts for this template -->
   <link href="../../resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,8 +23,9 @@
 
   <!-- Custom styles for this page -->
   <link href="../../resources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  
-  <!-- Bootstrap core JavaScript-->
+
+</head>
+	  <!-- Bootstrap core JavaScript-->
   <script src="../../resources/vendor/jquery/jquery.min.js"></script>
   <script src="../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -38,80 +41,74 @@
 
   <!-- Page level custom scripts -->
   <script src="../../resources/js/demo/datatables-demo.js"></script>
-  
-</head>
-
 <body>
-  	<!-- Page Wrapper -->
+
 	<div id="wrapper">
 		<!-- sidebar -->
 		<c:import url="/WEB-INF/views/include/sidebar.jsp" />
-    	<!-- Content Wrapper -->
-    	<div id="content-wrapper" class="d-flex flex-column">
-
-      		<!-- Main Content -->
-      		<div id="content">
-			<!-- topbar -->
-			<c:import url="/WEB-INF/views/include/topbar.jsp" />
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<c:import url="/WEB-INF/views/include/topbar.jsp" />
 				
 				<form method="post" name="form">
 					<input type="hidden" name="bno" value="${board.bno}">
-					<input type="hidden" name="page" value="${cri.page} ">
-					<input type="hidden" name="perPageNum" value="${cri.perPageNum }"> 
+					<input type="hidden" name='page' value='${cri.page}'>
+					<input type='hidden' name='perPageNum' value='${cri.perPageNum}'>
 				</form>
 				
+		
 				<div class="box-body">
 				
 					<div class="form-group">
-						<label for="exampleInputEamil">게시글 제목</label><input type="text" id="btitle" name="title" class="form-control" value="${board.btitle}">
+						<label for="exampleInputEamil">게시글 제목</label><input type="text" name="btitle" class="form-control" value="${board.btitle}" readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="content" rows="3" id="bcontent">${board.bcontent}</textarea>
+						<label for="exampleInputPassword1">게시글 내용</label><textarea class="form-control" name="bcontent" rows="3" readonly="readonly">${board.bcontent}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">작성자</label><input type="text" id="bwriter" name="writer" class="form-control" value="${board.bwriter}" readonly="readonly">
+						<label for="exampleInputEmail1">작성자</label><input type="text" name="bwriter" class="form-control" value="${board.bwriter}" readonly="readonly">
 					</div>
 				</div>
 				
 				<div class="box-footer text-center" style="width: 100%">
-					<button type="submit" class="btn btn-warning" onclick="save()">SAVE</button>
-					<button type="submit" class="btn btn-primary" onclick="cancel()">CANCEL</button>
+					<button type="submit" class="btn btn-warning" onclick="modify()">MODIFY</button>
+					<button type="submit" class="btn btn-danger" onclick="remove()">REMOVE</button>
+					<button type="submit" class="btn btn-primary" onclick="listAll()">LIST ALL</button>
 				</div>
 				
 				<script>
 					var formObj = document.form;
 
-					function save() {
+					function modify() {
 						
-						var title = document.getElementById('btitle').value;
-						var content = document.getElementById('bcontent').value;
-
-						let inputTitle = document.createElement('input');
-						let inputContent = document.createElement('input');
-
-						inputTitle.setAttribute("type","hidden");
-						inputTitle.setAttribute("name", "btitle");
-						inputTitle.setAttribute("value", title);
-						inputContent.setAttribute("type","hidden");
-						inputContent.setAttribute("name", "bcontent");
-						inputContent.setAttribute("value", content);
-						
-						formObj.appendChild(inputTitle);
-						formObj.appendChild(inputContent);			
 						formObj.setAttribute('action', '/board/modify');
-						formObj.setAttribute('method', 'post');
-						formObj.submit();
-					
+						formObj.setAttribute('method', 'get');					
+						formObj.submit(); 
+						
 					}
 
-					function cancel() {
-						self.location = "/board/readPage?bno="+formObj.bno.value+"&page="+formObj.page.value+"&perPageNum="+formObj.perPageNum.value;
+					function remove() {
+						
+						formObj.setAttribute('action','/board/remove');
+						formObj.submit(); 
+						
+					}
+
+					function listAll() {
+				
+						var bno = formObj.bno;
+						formObj.removeChild(bno);
+						
+						formObj.setAttribute('method','get');
+						formObj.setAttribute('action','/board/listPage');
+						formObj.submit(); 
+						
 					}
 				</script>
-				
 				
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

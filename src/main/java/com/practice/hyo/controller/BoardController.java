@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.practice.hyo.common.PageMaker;
-import com.practice.hyo.common.PagingVO;
+import com.practice.hyo.common.Criteria;
 import com.practice.hyo.domain.BoardVO;
 import com.practice.hyo.service.BoardService;
 
@@ -53,7 +54,7 @@ public class BoardController {
 		
 		bService.regist(vo);
 		
-		return "redirect:list";
+		return "redirect:listPage";
 	
 	}
 	
@@ -69,52 +70,58 @@ public class BoardController {
 	}
 	
 	@GetMapping(value = "modify")
-	public void modifyGET(@RequestParam("bno") Long bno, Model model) throws Exception {
+	public void modifyGET(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		
 		log.info("board Modify GET....");
-		
 		model.addAttribute("board", bService.read(bno));
 		
 	}
 	
 	@PostMapping(value ="modify")
-	public String modifyPOST(BoardVO board, RedirectAttributes rttr) throws Exception {
+	public String modifyPOST(BoardVO board, Criteria cri, RedirectAttributes rttr) throws Exception {
 		
 		log.info("board Modify POST...." + board);
-		
 		bService.update(board);
 		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "게시글 수정 성공!!");
 		
-		return "redirect:/board/list";
+		return "redirect:/board/listPage";
 		
 	}
 	
 	@PostMapping(value = "remove")
-	public String removePOST(@RequestParam("bno") Long bno, RedirectAttributes rttr) throws Exception {
+	public String removePOST(@RequestParam("bno") Long bno, Criteria cri, RedirectAttributes rttr) throws Exception {
 		
 		log.info("board Remove POST.... ");
 		
 		bService.delete(bno);
 		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addFlashAttribute("msg", "게시글 삭제 성공!!");
 		
-		return "redirect:/board/list";
+		return "redirect:/board/listPage";
 		
 	}
 	
 	@GetMapping(value = "listPage")
-	public void listAll(@ModelAttribute PagingVO page, Model model) throws Exception {
-		log.info("show list page with Paging........" + page.toString());
+	public void listAll(@ModelAttribute Criteria cri, Model model) throws Exception {
+		log.info("show list page with Paging........" + cri.toString());
 		
-		model.addAttribute("blist", bService.listPage(page));
+		model.addAttribute("blist", bService.listPage(cri));
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setPage(page);
-//		pageMaker.setTotalCount(131);
+		pageMaker.setCri(cri);
 		
-		pageMaker.setTotalCount(bService.countPaging(page));
+		pageMaker.setTotalCount(bService.countPaging(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
+	}
+	
+	@GetMapping(value = "readPage")
+	public void read(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		model.addAttribute("board", bService.read(bno));
 	}
 	
 }

@@ -3,6 +3,8 @@ package com.practice.hyo.common;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.practice.hyo.domain.SearchCriteria;
+
 public class PageMaker {
 
 	private int totalCount;
@@ -13,10 +15,10 @@ public class PageMaker {
 	
 	private int displayPageNum = 5;
 	
-	private PagingVO page;
+	private Criteria cri;
 	
-	public void setPage(PagingVO page) {
-		this.page = page;
+	public void setCri(Criteria cri) {
+		this.cri = cri;
 	}
 	
 	public void setTotalCount(int totalCount) {
@@ -27,11 +29,11 @@ public class PageMaker {
 	
 	private void calcData() {
 		
-		endPage = (int) (Math.ceil(page.getPage() / (double) displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
 		
 		startPage = (endPage - displayPageNum) + 1;
 		
-		int tempEndPage = (int) (Math.ceil(totalCount / (double) page.getPerPageNum()));
+		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
 		
 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
@@ -39,7 +41,7 @@ public class PageMaker {
 		
 		prev = startPage == 1 ? false : true;
 		
-		next = endPage * page.getPerPageNum() >= totalCount ? false : true;
+		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 		
 	}
 
@@ -87,24 +89,36 @@ public class PageMaker {
 		return totalCount;
 	}
 
-	public PagingVO getPage() {
-		return page;
+	public Criteria getCri() {
+		return cri;
 	}
 
 	@Override
 	public String toString() {
 		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
-				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", page=" + page + "]";
+				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
 	}
 	
-	public String makeQuery(int pages) {
+	public String makeQuery(int page) {
+	
+		UriComponents uriComponents = 
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.build();
+		
+		return uriComponents.toUriString();
+	}
+	
+	public String makeSearch(int page) {
 		
 		UriComponents uriComponents = 
 				UriComponentsBuilder.newInstance()
-				.queryParam("page", pages)
-				.queryParam("perPageNum", page.getPage())
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+				.queryParam("keyword", ((SearchCriteria)cri).getKeyword())
 				.build();
-		
 		return uriComponents.toUriString();
 	}
 	

@@ -64,7 +64,15 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+	              <select name="searchType">
+	              	<option value = "n" <c:out value="${cri.searchType == null?'selected':''}" />>검색</option>
+	              	<option value = "t" <c:out value="${cri.searchType eq 't'?'selected':''}" />>글제목</option>
+	              	<option value = "c" <c:out value="${cri.searchType eq 'c'?'selected':''}" />>글내용</option> 
+	              	<option value = "w" <c:out value="${cri.searchType eq 'w'?'selected':''}" />>작성자</option>
+	              </select>
+         		  <input type="text" name='keyword' id="keywordInput" value='${cri.keyword}'>
+         		  <button id="searchBtn" type="button" class="btn btn-secondary mb-3" style="margin-bottom: 0 !important;">Search</button>
+         		  <button id="newBtn" type="button" class="btn btn-secondary mb-3" style="margin-bottom: 0 !important;">New Board</button>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -80,49 +88,41 @@
                     </tr>
                   </thead>
                 	<tbody>
-                		<c:forEach items="${blist}" var="board">
-	                		<tr class="board-list">
-	                			<td><a href='/board/read?bno=<c:out value="${board.bno}"/>'><c:out value="${board.bno}" /></a></td>
-	                			<td><c:out value="${board.btitle}" /></td>
-	                			<td><c:out value="${board.bcontent}" /></td>
-	                			<td><c:out value="${board.bwriter}" /></td>
-	                			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></td>
-	                			<td><c:out value="${board.viewcnt}" /></td>
-	               			</tr>
-                		</c:forEach>
+		      		<c:forEach items="${blist}" var="boardVO">
+		          		
+		          		<tr>
+		          			<td>${boardVO.bno}</td>
+		          			<td>
+		          				<a href="/board/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${boardVO.bno}">${boardVO.btitle}</a>
+		          			</td>
+		          			<td>${boardVO.bcontent}</td>
+		          			<td>${boardVO.bwriter}</td>
+		          			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate}"/></td>
+		          			<td><span class="badge bg-red">${boardVO.viewcnt}</span></td>
+		          		</tr>
+		          		
+		          	</c:forEach>              		
                 	</tbody>
                 </table>
               </div>
             </div>
           	<nav aria-label="..." style="align-self: center;">
           		<ul class="pagination" >
+          			
           			<c:if test="${pageMaker.prev}">
-          				<li class="page-item"><a class="page-link" href="listPage?page=${pageMaker.startPage - 1}">&laquo;</a></li>
+          				<li class="page-item"><a class="page-link" href="listPage${pageMaker.makeQuery(pageMaker.startPage - 1) }">&laquo;</a></li>
           			</c:if>
           			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="idx">
-          				<li class="page-item<c:out value="${pageMaker.page.page == idx?' active':''}" />">
-          					<a class="page-link" href="listPage?page=${idx}">${idx}</a>
+          				<li class="page-item<c:out value="${pageMaker.cri.page == idx?' active':''}" />">
+          					<a class="page-link" href="listPage${pageMaker.makeQuery(idx) }">${idx}</a>
           				</li>
           			</c:forEach>
-          			
           			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-          				<li class="page-item"><a class="page-link" href="listPage?page=${pageMaker.endPage + 1}">&raquo;</a></li>
+          				<li class="page-item"><a class="page-link" href="listPage${pageMaker.makeQuery(pageMaker.endPage + 1) }">&raquo;</a></li>
           			</c:if>
+          			
           		</ul>
           	</nav>
-          	
-          	<c:forEach items="${blist}" var="boardVO">
-          		<tr>
-          			<td>${boardVO.bno}</td>
-          			<td>
-          				<a href="/board/readPage${pageMaker.makeQuery(pageMaker.page.page)}&bno=${boardVO.bno}">${boardVO.btitle}</a>
-          			</td>
-          			<td>${boardVO.bwriter}</td>
-          			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${boardVO.regdate}"/></td>
-          			<td><span class="badge bg-red">${boardVO.viewcnt}</span></td>
-          		</tr>
-          		
-          	</c:forEach>
           	
           </div>
 			<button type="button" class="btn btn-secondary mb-3" onclick="registerBoard();">글쓰기</button>

@@ -1,11 +1,11 @@
 package com.practice.hyo.common;
 
-public class PagingVO {
+public class Criteria {
 
 	private int page;
 	private int perPageNum;
 
-	public PagingVO() {
+	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 5;
 	}
@@ -46,7 +46,8 @@ public class PagingVO {
 
 	@Override
 	public String toString() {
-		return "PagingVO [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
+
 
 }

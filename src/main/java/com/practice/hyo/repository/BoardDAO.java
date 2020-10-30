@@ -2,7 +2,7 @@ package com.practice.hyo.repository;
 
 import java.util.List;
 
-import com.practice.hyo.common.PagingVO;
+import com.practice.hyo.common.Criteria;
 import com.practice.hyo.domain.BoardVO;
 
 public interface BoardDAO {
@@ -17,8 +17,8 @@ public interface BoardDAO {
 	
 	public List<BoardVO> listAll()throws Exception;
 
-	public List<BoardVO> listPage(PagingVO page) throws Exception;
+	public List<BoardVO> listPage(Criteria cri) throws Exception;
 	
-	public int countPaging(PagingVO page)throws Exception;
+	public int countPaging(Criteria cri)throws Exception;
 	
 }

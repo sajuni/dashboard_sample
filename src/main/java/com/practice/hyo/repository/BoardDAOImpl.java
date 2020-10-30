@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.practice.hyo.common.PagingVO;
+import com.practice.hyo.common.Criteria;
 import com.practice.hyo.domain.BoardVO;
 
 @Repository
@@ -43,13 +43,13 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> listPage(PagingVO page) throws Exception {
-		return session.selectList(namespace+".listPage", page);
+	public List<BoardVO> listPage(Criteria cri) throws Exception {
+		return session.selectList(namespace+".listPage", cri);
 	}
 
 	@Override
-	public int countPaging(PagingVO page) throws Exception {
-		return session.selectOne(namespace+".countPaging", page);
+	public int countPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace+".countPaging", cri);
 	}
 
 
