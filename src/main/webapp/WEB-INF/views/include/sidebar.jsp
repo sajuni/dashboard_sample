@@ -52,7 +52,7 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item active">
-        <a class="nav-link" href="/board/listPage">
+        <a class="nav-link" href="/sboard/listPage">
           <i class="fas fa-fw fa-table"></i>
           <span>게시판</span></a>
       </li>

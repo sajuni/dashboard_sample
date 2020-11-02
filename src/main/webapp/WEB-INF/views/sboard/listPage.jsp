@@ -93,7 +93,7 @@
 		          		<tr>
 		          			<td>${boardVO.bno}</td>
 		          			<td>
-		          				<a href="/board/readPage${pageMaker.makeQuery(pageMaker.cri.page)}&bno=${boardVO.bno}">${boardVO.btitle}</a>
+		          				<a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${boardVO.bno}">${boardVO.btitle}</a>
 		          			</td>
 		          			<td>${boardVO.bcontent}</td>
 		          			<td>${boardVO.bwriter}</td>
@@ -111,22 +111,21 @@
           		<ul class="pagination" >
           			
           			<c:if test="${pageMaker.prev}">
-          				<li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+          				<li class="page-item"><a class="page-link" href="listPage${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
           			</c:if>
           			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage }" var="idx">
           				<li class="page-item<c:out value="${pageMaker.cri.page == idx?' active':''}" />">
-          					<a class="page-link" href="list${pageMaker.makeSearch(idx) }">${idx}</a>
+          					<a class="page-link" href="listPage${pageMaker.makeSearch(idx) }">${idx}</a>
           				</li>
           			</c:forEach>
           			<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-          				<li class="page-item"><a class="page-link" href="list${pageMaker.makeSearch(pageMaker.endPage + 1) }">&raquo;</a></li>
+          				<li class="page-item"><a class="page-link" href="listPage${pageMaker.makeSearch(pageMaker.endPage + 1) }">&raquo;</a></li>
           			</c:if>
           			
           		</ul>
           	</nav>
           	
           </div>
-			<button type="button" class="btn btn-secondary mb-3" onclick="registerBoard();">글쓰기</button>
 				<script>
 					function registerBoard() {
 						location.href="register"
@@ -180,12 +179,28 @@
   </div>
 
 	<script>
-			
+			$(document).ready(() => {
+				$('#searchBtn').on(
+						"click",
+						(event) => {
+							self.location = "listPage"
+								+ '${pageMaker.makeQuery(1)}'
+								+ "&searchType="
+								+ $("select option:selected").val()
+								+ "&keyword=" + $('#keywordInput').val();
+
+							});
+
+				$('#newBtn').on("click", (evt) => {self.location = "register"; });
+				});
+	
 			var result = '${msg}';
 
 			if (result != "") {
 				alert(result);
 			}
+
+			
 	</script>
 
 </body>
