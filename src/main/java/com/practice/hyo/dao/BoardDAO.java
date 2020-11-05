@@ -1,4 +1,4 @@
-package com.practice.hyo.repository;
+package com.practice.hyo.dao;
 
 import java.util.List;
 
@@ -25,5 +25,9 @@ public interface BoardDAO {
 	public List<BoardVO> listSearch(SearchCriteria cri)throws Exception;
 	
 	public int listSearchCount(SearchCriteria cri)throws Exception;
+	
+	public void updateReplyCnt(Long bno, int amount)throws Exception;
+	
+	public void updateViewCnt(Long bno)throws Exception;
 	
 }

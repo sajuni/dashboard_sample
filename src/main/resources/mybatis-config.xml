@@ -8,8 +8,9 @@
   	
   	<typeAliases>
   		<typeAlias type="com.practice.hyo.domain.BoardVO" alias="boardVO"/>
-  		<!-- <package name="com.practice.hyo.domain"/> -->
   		<typeAlias type="com.practice.hyo.domain.MemberVO" alias="memberVO"/>
+  		<typeAlias type="com.practice.hyo.domain.ReplyVO" alias="ReplyVO"/>
+  		<typeAlias type="com.practice.hyo.domain.MessageVO" alias="MessageVO"/>
   	</typeAliases>
   	
 </configuration>

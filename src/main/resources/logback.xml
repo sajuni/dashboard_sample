@@ -48,7 +48,7 @@
     <logger name="org.apache.commons" level="ERROR">
     </logger>
     
-    <logger name="org.springframework" level="DEBUG" >
+    <logger name="org.springframework" level="INFO" >
     </logger>
     
     <logger name="egovframework.*" level="DEBUG">
@@ -63,8 +63,8 @@
     <logger name="jdbc.audit" level="WARN"/>
     <logger name="jdbc.resultset" level="ERROR"/>
     <logger name="jdbc.resultsettable" level="ERROR"/>
-    <logger name="jdbc.connection" level="INFO"/>
- -->
+    <logger name="jdbc.connection" level="INFO"/> -->
+
     <logger name="org.mybatis.spring" level="DEBUG">
     </logger>
     

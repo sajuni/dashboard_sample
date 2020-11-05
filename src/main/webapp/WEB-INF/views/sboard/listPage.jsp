@@ -93,7 +93,7 @@
 		          		<tr>
 		          			<td>${boardVO.bno}</td>
 		          			<td>
-		          				<a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${boardVO.bno}">${boardVO.btitle}</a>
+		          				<a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${boardVO.bno}">${boardVO.btitle} <strong>[${boardVO.replycnt}]</strong></a>
 		          			</td>
 		          			<td>${boardVO.bcontent}</td>
 		          			<td>${boardVO.bwriter}</td>

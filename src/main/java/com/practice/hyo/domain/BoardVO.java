@@ -2,6 +2,11 @@ package com.practice.hyo.domain;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BoardVO {
 
 	private Long bno;
@@ -10,6 +15,8 @@ public class BoardVO {
 	private String bwriter;
 	private Date regdate;
 	private int viewcnt;
+	private int replycnt;
+	
 	public Long getBno() {
 		return bno;
 	}

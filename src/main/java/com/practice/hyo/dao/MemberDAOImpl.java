@@ -1,4 +1,4 @@
-package com.practice.hyo.repository;
+package com.practice.hyo.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

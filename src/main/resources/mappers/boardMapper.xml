@@ -40,7 +40,7 @@
   <select id="listPage" resultType="boardVO">
   	<![CDATA[
   	select
-  		bno, btitle, bcontent, bwriter, regdate, viewcnt
+  		bno, btitle, bcontent, bwriter, regdate, viewcnt, replycnt
   	from
   		tbl_board
   	where bno > 0
@@ -98,5 +98,13 @@
   ]]>
   <include refid="search"></include>
   </select>
+  
+  <update id="updateReplyCnt">
+  	update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
+  </update>
+  
+  <update id="updateViewCnt">
+	update tbl_board set viewcnt = viewcnt +1 where bno = #{bno}  
+  </update>
   
   </mapper>

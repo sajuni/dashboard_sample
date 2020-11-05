@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.practice.hyo.domain.MemberVO;
-import com.practice.hyo.service.BoardService;
 import com.practice.hyo.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;

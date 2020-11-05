@@ -5,10 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.ui.Model;
 
+import com.practice.hyo.dao.BoardDAO;
 import com.practice.hyo.domain.BoardVO;
-import com.practice.hyo.repository.BoardDAO;
 
 import lombok.extern.slf4j.Slf4j;
 @Slf4j

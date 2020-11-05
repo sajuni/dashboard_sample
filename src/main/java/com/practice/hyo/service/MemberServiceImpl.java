@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.practice.hyo.dao.MemberDAO;
 import com.practice.hyo.domain.MemberVO;
-import com.practice.hyo.repository.MemberDAO;
 
-import lombok.extern.slf4j.Slf4j;
-@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
 

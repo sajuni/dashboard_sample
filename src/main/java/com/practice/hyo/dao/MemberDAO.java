@@ -1,4 +1,4 @@
-package com.practice.hyo.repository;
+package com.practice.hyo.dao;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
