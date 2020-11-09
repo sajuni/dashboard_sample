@@ -4,9 +4,11 @@ import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class BoardVO {
 
 	private Long bno;
@@ -16,6 +18,8 @@ public class BoardVO {
 	private Date regdate;
 	private int viewcnt;
 	private int replycnt;
+	
+	private String[] files;
 	
 	public Long getBno() {
 		return bno;
@@ -52,12 +56,6 @@ public class BoardVO {
 	}
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
-	}
-	
-	@Override
-	public String toString() {
-		return "BoardVO [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bwriter=" + bwriter + ", regdate="
-				+ regdate + ", viewcnt=" + viewcnt + "]";
 	}
 	
 }

@@ -11,6 +11,7 @@
   		<typeAlias type="com.practice.hyo.domain.MemberVO" alias="memberVO"/>
   		<typeAlias type="com.practice.hyo.domain.ReplyVO" alias="ReplyVO"/>
   		<typeAlias type="com.practice.hyo.domain.MessageVO" alias="MessageVO"/>
+  		<typeAlias type="com.practice.hyo.domain.UserVO" alias="UserVO"/>
   	</typeAliases>
   	
 </configuration>

@@ -30,4 +30,8 @@ public interface BoardDAO {
 	
 	public void updateViewCnt(Long bno)throws Exception;
 	
+	public void addAttach(String fullName)throws Exception;
+	
+	public List<String> getAttach(Long bno)throws Exception;
+	
 }

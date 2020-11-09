@@ -82,5 +82,15 @@ public class BoardDAOImpl implements BoardDAO {
 		session.update(namespace + ".updateViewCnt", bno);
 	}
 
+	@Override
+	public void addAttach(String fullName) throws Exception {
+		session.insert(namespace + ".addAttach", fullName);
+	}
+
+	@Override
+	public List<String> getAttach(Long bno) throws Exception {
+		return session.selectList(namespace + ".getAttach", bno);
+	}
+
 
 }

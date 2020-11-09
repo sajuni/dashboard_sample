@@ -18,9 +18,20 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO dao;
 	
+	@Transactional
 	@Override
 	public void regist(BoardVO board) throws Exception {
+		
 		dao.create(board);
+		
+		String[] files = board.getFiles();
+		
+		if(files == null) {return;}
+		
+		for (String fileName : files) {
+			dao.addAttach(fileName);
+		}
+		
 	}
 
 	@Transactional(isolation=Isolation.READ_COMMITTED)
@@ -63,6 +74,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		return dao.listSearchCount(cri);
+	}
+
+	@Override
+	public List<String> getAttach(Long bno) throws Exception {
+		return dao.getAttach(bno);
 	}
 
 
